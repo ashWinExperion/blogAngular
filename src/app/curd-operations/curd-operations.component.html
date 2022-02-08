@@ -1,0 +1,108 @@
+<!--template driven form-->
+<div class="containe">
+    <div class="row">
+
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form name="empform" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+            
+                <!--Employee ID --hidden-->
+                <input type="hidden" name="PostId" [(ngModel)]="blogService.formData.PostId">
+                
+                <!--Employee name-->
+                <div class="form-group">
+                    <label>Post Content: </label>
+                    <input type="text" name="Title"
+                    #Title="ngModel"
+                    [(ngModel)]="blogService.formData.Title"
+                    class="form-control"
+                    placeholder="Enter full name"
+                    required
+                    minlength="5"
+                    maxlength="25"
+                    [ngClass]="{'is-invalid': Title.touched && Title.invalid}" >
+            
+                    <!--validation-->
+                    <div class="validation-error" *ngIf="Title.touched && Title.invalid ">
+                        <div *ngIf="Title.errors.required">
+                           Post Content
+                        </div>
+                    </div>
+            
+                </div>
+            
+                <!--Description-->
+                <div class="form-group">
+                    <label>Description: </label>
+                    <input type="text" name="Description"
+                    #Description="ngModel"
+                    [(ngModel)]="blogService.formData.Description"
+                    class="form-control"
+                    placeholder="Enter Description"
+                    required
+                    minlength="2"
+                    maxlength="25"
+                    [ngClass]="{'is-invalid': Description.touched && Description.invalid}" >
+            
+                    <!--validation-->
+                    <div class="validation-error" *ngIf="Description.touched && Description.invalid ">
+                        <div *ngIf="Description.errors.required">
+                           Description is required
+                        </div>
+                    </div>
+                </div>
+            
+                <!--date of joining-->
+                <div class="form-group" style="display: none;">
+                    <label>Date of Post: </label>
+                    <input type="date" name="CreatedDate"
+                    #CreatedDate="ngModel"
+                    [(ngModel)]="blogService.formData.CreatedDate"
+                    class="form-control"
+                    required
+                    [ngClass]="{'is-invalid': CreatedDate.touched && CreatedDate.invalid}" >
+            
+                    <!--validation-->
+                    <div class="validation-error" *ngIf="CreatedDate.touched && CreatedDate.invalid ">
+                        <div *ngIf="CreatedDate.errors.required">
+                           Date Of Post
+                        </div>
+                    </div>
+                </div>
+            
+             
+                <!--cat dropdwn-->
+                <div class="form-group">
+                    <label>Category: </label>
+                    <select style="color: black;" name="CategoryId" id="CategoryId"
+                    #CategoryId="ngModel" class="form-control"
+                    [(ngModel)]="blogService.formData.CategoryId">
+                    <option value=0 style="color: black;" disabled>Select Department</option>
+                    <option *ngFor="let cat of blogService.cat"
+                    value="{{cat.Id}}">{{cat.Name}}</option>
+                    </select>
+            
+                    <!--validation-->
+                     <div class="validation-error" *ngIf="CategoryId.touched && CategoryId.invalid ">
+                        <div *ngIf="Contact.errors.required">
+                            CategoryId is required
+                        </div>
+                    </div>
+                </div> 
+            
+            
+                <div class="form-group">
+                    <button type="submit"
+                    [disabled]="!(form.valid && form.dirty)"
+                    class="btn btn-lg btn-primary form-control"
+                    >Post</button>
+                </div>
+            
+            
+            
+            
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>r
